@@ -45,26 +45,31 @@ import matplotlib.pyplot as plt
 ```
 
 ```python
+# 1. Load and prepare data
 data = pd.read_csv('CarPrice_Assignment (1).csv')
 ```
 
 ```python
+# Simple preprocessing
 data = data.drop(['car_ID','CarName'],axis=1)
 data = pd.get_dummies(data,drop_first=True)
 ```
 
 ```python
+# 2. Split data
 x = data.drop('price',axis=1)
 y = data['price']
 x_train,x_test,y_train,y_test = train_test_split(x,y,test_size=0.2,random_state=42)
 ```
 
 ```python
+# 3. Create and train model
 model = LinearRegression()
 model.fit(x_train,y_train)
 ```
 
 ```python
+# 4. Evaluate with cross-validation (simple version)
 print('AMIRTHA VARSHINI M')
 print('212224230017')
 print("\n===Cross Validation ===")
@@ -74,6 +79,7 @@ print(f"Average R² Score: {cv_scores.mean():.4f}")
 ```
 
 ```python
+# 5. Test set evaluationpython
 y_pred = model.predict(x_test)
 print("\n===Test Set Perfomance ===")
 print(f"MSE:{mean_squared_error(y_test,y_pred):.2f}")
@@ -81,6 +87,7 @@ print(f"R²: {r2_score(y_test,y_pred):.4f}")
 ```
 
 ```python
+# 6. Visualization
 plt.figure(figsize=(8, 6))
 plt.scatter(y_test, y_pred, alpha=0.6)
 plt.plot([y.min(), y.max()], [y.min(), y.max()],'r--')
